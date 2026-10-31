@@ -469,6 +469,13 @@ a.button {
   font-size: 15px;
 }
 
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 768px) 224px;
+  justify-content: center;
+  gap: 24px;
+}
+
 .article {
   width: 100%;
   max-width: 768px;
@@ -476,6 +483,10 @@ a.button {
   padding: 32px 24px;
   font-size: 16px;
   line-height: 1.625;
+}
+
+.article section {
+  scroll-margin-top: 24px;
 }
 
 .article section + section {
@@ -534,6 +545,58 @@ a.button {
   border-top: 1px solid hsl(var(--border));
   color: hsl(var(--text-subtle));
   font-size: 13px;
+}
+
+.toc {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  padding: 40px 16px 32px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.toc-title {
+  margin-bottom: 12px;
+  color: hsl(var(--text-muted));
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.toc ul {
+  padding: 0;
+  border-left: 1px solid hsl(var(--border));
+  list-style: none;
+}
+
+.toc a {
+  display: block;
+  margin-left: -1px;
+  padding: 6px 0 6px 16px;
+  border-left: 1px solid transparent;
+  color: hsl(var(--text-muted));
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: hsl(var(--text));
+}
+
+.toc a[aria-current] {
+  border-left-color: hsl(var(--accent));
+  color: hsl(var(--accent));
+}
+
+@media (max-width: 1100px) {
+  .article-layout {
+    display: block;
+  }
+
+  .toc {
+    display: none;
+  }
 }
 
 @media (max-width: 840px) {

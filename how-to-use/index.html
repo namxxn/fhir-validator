@@ -37,6 +37,7 @@
     <meta name="twitter:site" content="@Medblocks_" />
     <meta name="twitter:creator" content="@Medblocks_" />
     <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/how-to-use.ts"></script>
   </head>
   <body>
     <header class="topbar">
@@ -67,81 +68,97 @@
       </div>
     </header>
 
-    <main class="article">
-      <h1>How to use the FHIR Validator</h1>
-      <p class="article-intro">
-        The FHIR Validator checks HL7® FHIR® R4 resources in JSON. It runs in your browser. Nothing
-        you paste or open is uploaded.
-      </p>
-      <section>
-        <h2>Checking a resource</h2>
+    <div class="article-layout">
+      <main class="article">
+        <h1>How to use the FHIR Validator</h1>
+        <p class="article-intro">
+          The FHIR Validator checks HL7® FHIR® R4 resources in JSON. It runs in your browser.
+          Nothing you paste or open is uploaded.
+        </p>
+        <section id="checking-a-resource">
+          <h2>Checking a resource</h2>
+          <ul>
+            <li>
+              Paste a resource into the editor, or use <strong>Open file</strong> for a .json file.
+            </li>
+            <li>You can also drag a file onto the editor.</li>
+            <li><strong>Load example</strong> loads a valid R4 Patient. Use it to try the tool.</li>
+            <li>Choose <strong>Validate</strong>, or press Ctrl+Enter (Cmd+Enter on a Mac).</li>
+            <li>
+              <strong>Format</strong> tidies the indentation, and <strong>Clear</strong> empties the
+              editor.
+            </li>
+          </ul>
+        </section>
+        <section id="reading-the-results">
+          <h2>Reading the results</h2>
+          <p>
+            The summary at the top shows that the resource is valid, or it shows the number of
+            errors and warnings. Each problem below the summary shows a message, the element path
+            and the line number. Click a problem to go to that line in the editor. Markers beside
+            the line numbers show the same problems.
+          </p>
+          <p>
+            An error means that the resource breaks the specification. The tool has only two
+            warnings: a Coding with a code but no system, and a Quantity with a value but no unit or
+            code.
+          </p>
+        </section>
+        <section id="nothing-is-uploaded">
+          <h2>Nothing is uploaded</h2>
+          <p>
+            The validator runs on this device. The content security policy on this page blocks all
+            outbound connections, so nothing you paste or open can leave.
+          </p>
+        </section>
+        <section id="what-it-checks">
+          <h2>What it checks</h2>
+          <p>The rules come from the official HL7® FHIR® R4 (4.0.1) definition files.</p>
+          <ul>
+            <li>JSON syntax, with the line and column of the problem.</li>
+            <li>That <code>resourceType</code> is present and is a real R4 resource type.</li>
+            <li>Unknown elements, with a suggestion when there is an obvious near match.</li>
+            <li>Cardinality: required elements, and arrays versus single values.</li>
+            <li>Data types, recursively through complex types such as HumanName and Identifier.</li>
+            <li>Primitive formats, including real calendar dates.</li>
+            <li>Choice elements: at most one present, and only an allowed type.</li>
+            <li>
+              Codes for elements with a required binding, where the spec fully lists the codes.
+            </li>
+            <li>JSON rules: no nulls or empty values, and correct primitive extensions.</li>
+            <li>
+              Nested resources: contained resources, bundle entries and any other resource element.
+            </li>
+          </ul>
+        </section>
+        <section id="what-it-does-not-check">
+          <h2>What it does not check</h2>
+          <p>
+            It does not check FHIRPath invariants, terminology (for example, whether a LOINC or
+            SNOMED code exists), or profiles and implementation guides such as US Core. It reads
+            JSON, not XML, and it covers R4 only. For full conformance checks, use the
+            <a href="https://validator.fhir.org/" rel="noopener noreferrer"
+              >official HL7® validator</a
+            >.
+          </p>
+        </section>
+        <footer class="legal">
+          <p>
+            HL7® and FHIR® are the registered trademarks of Health Level Seven International and the
+            use of these trademarks does not constitute an endorsement by HL7.
+          </p>
+        </footer>
+      </main>
+      <nav class="toc" aria-labelledby="toc-title">
+        <p id="toc-title" class="toc-title">On this page</p>
         <ul>
-          <li>
-            Paste a resource into the editor, or use <strong>Open file</strong> for a .json file.
-          </li>
-          <li>You can also drag a file onto the editor.</li>
-          <li><strong>Load example</strong> loads a valid R4 Patient. Use it to try the tool.</li>
-          <li>Choose <strong>Validate</strong>, or press Ctrl+Enter (Cmd+Enter on a Mac).</li>
-          <li>
-            <strong>Format</strong> tidies the indentation, and <strong>Clear</strong> empties the
-            editor.
-          </li>
+          <li><a href="#checking-a-resource">Checking a resource</a></li>
+          <li><a href="#reading-the-results">Reading the results</a></li>
+          <li><a href="#nothing-is-uploaded">Nothing is uploaded</a></li>
+          <li><a href="#what-it-checks">What it checks</a></li>
+          <li><a href="#what-it-does-not-check">What it does not check</a></li>
         </ul>
-      </section>
-      <section>
-        <h2>Reading the results</h2>
-        <p>
-          The summary at the top shows that the resource is valid, or it shows the number of errors
-          and warnings. Each problem below the summary shows a message, the element path and the
-          line number. Click a problem to go to that line in the editor. Markers beside the line
-          numbers show the same problems.
-        </p>
-        <p>
-          An error means that the resource breaks the specification. The tool has only two warnings:
-          a Coding with a code but no system, and a Quantity with a value but no unit or code.
-        </p>
-      </section>
-      <section>
-        <h2>Nothing is uploaded</h2>
-        <p>
-          The validator runs on this device. The content security policy on this page blocks all
-          outbound connections, so nothing you paste or open can leave.
-        </p>
-      </section>
-      <section>
-        <h2>What it checks</h2>
-        <p>The rules come from the official HL7® FHIR® R4 (4.0.1) definition files.</p>
-        <ul>
-          <li>JSON syntax, with the line and column of the problem.</li>
-          <li>That <code>resourceType</code> is present and is a real R4 resource type.</li>
-          <li>Unknown elements, with a suggestion when there is an obvious near match.</li>
-          <li>Cardinality: required elements, and arrays versus single values.</li>
-          <li>Data types, recursively through complex types such as HumanName and Identifier.</li>
-          <li>Primitive formats, including real calendar dates.</li>
-          <li>Choice elements: at most one present, and only an allowed type.</li>
-          <li>Codes for elements with a required binding, where the spec fully lists the codes.</li>
-          <li>JSON rules: no nulls or empty values, and correct primitive extensions.</li>
-          <li>
-            Nested resources: contained resources, bundle entries and any other resource element.
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h2>What it does not check</h2>
-        <p>
-          It does not check FHIRPath invariants, terminology (for example, whether a LOINC or SNOMED
-          code exists), or profiles and implementation guides such as US Core. It reads JSON, not
-          XML, and it covers R4 only. For full conformance checks, use the
-          <a href="https://validator.fhir.org/" rel="noopener noreferrer">official HL7® validator</a
-          >.
-        </p>
-      </section>
-      <footer class="legal">
-        <p>
-          HL7® and FHIR® are the registered trademarks of Health Level Seven International and the
-          use of these trademarks does not constitute an endorsement by HL7.
-        </p>
-      </footer>
-    </main>
+      </nav>
+    </div>
   </body>
 </html>
