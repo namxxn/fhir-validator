@@ -1,0 +1,798 @@
+{
+ "account-questionnaire.json": {
+  "errors": 32,
+  "message": "Missing required element \"linkId\"."
+ },
+ "activitydefinition-questionnaire.json": {
+  "errors": 71,
+  "message": "Missing required element \"linkId\"."
+ },
+ "actualgroup-questionnaire.json": {
+  "errors": 34,
+  "message": "Missing required element \"linkId\"."
+ },
+ "adverseevent-questionnaire.json": {
+  "errors": 41,
+  "message": "Missing required element \"linkId\"."
+ },
+ "allergyintolerance-questionnaire.json": {
+  "errors": 36,
+  "message": "Missing required element \"linkId\"."
+ },
+ "appointment-questionnaire.json": {
+  "errors": 39,
+  "message": "Missing required element \"linkId\"."
+ },
+ "appointmentresponse-questionnaire.json": {
+  "errors": 17,
+  "message": "Missing required element \"linkId\"."
+ },
+ "auditevent-questionnaire.json": {
+  "errors": 66,
+  "message": "Missing required element \"linkId\"."
+ },
+ "basic-questionnaire.json": {
+  "errors": 14,
+  "message": "Missing required element \"linkId\"."
+ },
+ "binary-questionnaire.json": {
+  "errors": 9,
+  "message": "Missing required element \"linkId\"."
+ },
+ "biologicallyderivedproduct-questionnaire.json": {
+  "errors": 46,
+  "message": "Missing required element \"linkId\"."
+ },
+ "bmi-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "bodyheight-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "bodystructure-questionnaire.json": {
+  "errors": 17,
+  "message": "Missing required element \"linkId\"."
+ },
+ "bodytemp-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "bodyweight-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "bp-questionnaire.json": {
+  "errors": 78,
+  "message": "Missing required element \"linkId\"."
+ },
+ "bundle-questionnaire.json": {
+  "errors": 50,
+  "message": "Missing required element \"linkId\"."
+ },
+ "capabilitystatement-questionnaire.json": {
+  "errors": 142,
+  "message": "Missing required element \"linkId\"."
+ },
+ "careplan-questionnaire.json": {
+  "errors": 60,
+  "message": "Missing required element \"linkId\"."
+ },
+ "careteam-questionnaire.json": {
+  "errors": 29,
+  "message": "Missing required element \"linkId\"."
+ },
+ "catalog-questionnaire.json": {
+  "errors": 59,
+  "message": "Missing required element \"linkId\"."
+ },
+ "catalogentry-questionnaire.json": {
+  "errors": 27,
+  "message": "Missing required element \"linkId\"."
+ },
+ "cdshooksguidanceresponse-questionnaire.json": {
+  "errors": 25,
+  "message": "Missing required element \"linkId\"."
+ },
+ "cdshooksrequestgroup-questionnaire.json": {
+  "errors": 62,
+  "message": "Missing required element \"linkId\"."
+ },
+ "cdshooksserviceplandefinition-questionnaire.json": {
+  "errors": 116,
+  "message": "Missing required element \"linkId\"."
+ },
+ "chargeitem-questionnaire.json": {
+  "errors": 40,
+  "message": "Missing required element \"linkId\"."
+ },
+ "chargeitemdefinition-questionnaire.json": {
+  "errors": 54,
+  "message": "Missing required element \"linkId\"."
+ },
+ "cholesterol-questionnaire.json": {
+  "errors": 55,
+  "message": "Missing required element \"linkId\"."
+ },
+ "claim-questionnaire.json": {
+  "errors": 154,
+  "message": "Missing required element \"linkId\"."
+ },
+ "claimresponse-questionnaire.json": {
+  "errors": 146,
+  "message": "Missing required element \"linkId\"."
+ },
+ "clinicaldocument-questionnaire.json": {
+  "errors": 59,
+  "message": "Missing required element \"linkId\"."
+ },
+ "clinicalimpression-questionnaire.json": {
+  "errors": 40,
+  "message": "Missing required element \"linkId\"."
+ },
+ "codesystem-extensions-CodeSystem-author.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "codesystem-extensions-CodeSystem-effective.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "codesystem-extensions-CodeSystem-end.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "codesystem-extensions-CodeSystem-keyword.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "codesystem-extensions-CodeSystem-workflow.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "codesystem-questionnaire.json": {
+  "errors": 74,
+  "message": "Missing required element \"linkId\"."
+ },
+ "communication-questionnaire.json": {
+  "errors": 36,
+  "message": "Missing required element \"linkId\"."
+ },
+ "communicationrequest-questionnaire.json": {
+  "errors": 35,
+  "message": "Missing required element \"linkId\"."
+ },
+ "compartmentdefinition-questionnaire.json": {
+  "errors": 32,
+  "message": "Missing required element \"linkId\"."
+ },
+ "composition-questionnaire.json": {
+  "errors": 59,
+  "message": "Missing required element \"linkId\"."
+ },
+ "computableplandefinition-questionnaire.json": {
+  "errors": 116,
+  "message": "Missing required element \"linkId\"."
+ },
+ "conceptmap-questionnaire.json": {
+  "errors": 70,
+  "message": "Missing required element \"linkId\"."
+ },
+ "condition-questionnaire.json": {
+  "errors": 38,
+  "message": "Missing required element \"linkId\"."
+ },
+ "consent-questionnaire.json": {
+  "errors": 58,
+  "message": "Missing required element \"linkId\"."
+ },
+ "contract-questionnaire.json": {
+  "errors": 185,
+  "message": "Missing required element \"linkId\"."
+ },
+ "coverage-questionnaire.json": {
+  "errors": 46,
+  "message": "Missing required element \"linkId\"."
+ },
+ "coverageeligibilityrequest-questionnaire.json": {
+  "errors": 54,
+  "message": "Missing required element \"linkId\"."
+ },
+ "coverageeligibilityresponse-questionnaire.json": {
+  "errors": 59,
+  "message": "Missing required element \"linkId\"."
+ },
+ "cqf-questionnaire-questionnaire.json": {
+  "errors": 72,
+  "message": "Missing required element \"linkId\"."
+ },
+ "cqllibrary-questionnaire.json": {
+  "errors": 43,
+  "message": "Missing required element \"linkId\"."
+ },
+ "detectedissue-questionnaire.json": {
+  "errors": 32,
+  "message": "Missing required element \"linkId\"."
+ },
+ "device-questionnaire.json": {
+  "errors": 67,
+  "message": "Missing required element \"linkId\"."
+ },
+ "devicedefinition-questionnaire.json": {
+  "errors": 65,
+  "message": "Missing required element \"linkId\"."
+ },
+ "devicemetric-questionnaire.json": {
+  "errors": 26,
+  "message": "Missing required element \"linkId\"."
+ },
+ "devicemetricobservation-questionnaire.json": {
+  "errors": 55,
+  "message": "Missing required element \"linkId\"."
+ },
+ "devicerequest-questionnaire.json": {
+  "errors": 38,
+  "message": "Missing required element \"linkId\"."
+ },
+ "deviceusestatement-questionnaire.json": {
+  "errors": 22,
+  "message": "Missing required element \"linkId\"."
+ },
+ "diagnosticreport-genetics-questionnaire.json": {
+  "errors": 33,
+  "message": "Missing required element \"linkId\"."
+ },
+ "diagnosticreport-questionnaire.json": {
+  "errors": 33,
+  "message": "Missing required element \"linkId\"."
+ },
+ "documentmanifest-questionnaire.json": {
+  "errors": 27,
+  "message": "Missing required element \"linkId\"."
+ },
+ "documentreference-questionnaire.json": {
+  "errors": 48,
+  "message": "Missing required element \"linkId\"."
+ },
+ "effectevidencesynthesis-questionnaire.json": {
+  "errors": 86,
+  "message": "Missing required element \"linkId\"."
+ },
+ "elementdefinition-de-questionnaire.json": {
+  "errors": 512,
+  "message": "Missing required element \"linkId\"."
+ },
+ "encounter-questionnaire.json": {
+  "errors": 76,
+  "message": "Missing required element \"linkId\"."
+ },
+ "endpoint-questionnaire.json": {
+  "errors": 20,
+  "message": "Missing required element \"linkId\"."
+ },
+ "enrollmentrequest-questionnaire.json": {
+  "errors": 16,
+  "message": "Missing required element \"linkId\"."
+ },
+ "enrollmentresponse-questionnaire.json": {
+  "errors": 17,
+  "message": "Missing required element \"linkId\"."
+ },
+ "episodeofcare-questionnaire.json": {
+  "errors": 32,
+  "message": "Missing required element \"linkId\"."
+ },
+ "eventdefinition-questionnaire.json": {
+  "errors": 40,
+  "message": "Missing required element \"linkId\"."
+ },
+ "evidence-questionnaire.json": {
+  "errors": 40,
+  "message": "Missing required element \"linkId\"."
+ },
+ "evidencevariable-questionnaire.json": {
+  "errors": 97,
+  "message": "Missing required element \"linkId\"."
+ },
+ "examplescenario-questionnaire.json": {
+  "errors": 88,
+  "message": "Missing required element \"linkId\"."
+ },
+ "explanationofbenefit-questionnaire.json": {
+  "errors": 261,
+  "message": "Missing required element \"linkId\"."
+ },
+ "familymemberhistory-genetic-questionnaire.json": {
+  "errors": 35,
+  "message": "Missing required element \"linkId\"."
+ },
+ "familymemberhistory-questionnaire.json": {
+  "errors": 35,
+  "message": "Missing required element \"linkId\"."
+ },
+ "flag-questionnaire.json": {
+  "errors": 17,
+  "message": "Missing required element \"linkId\"."
+ },
+ "goal-questionnaire.json": {
+  "errors": 33,
+  "message": "Missing required element \"linkId\"."
+ },
+ "graphdefinition-questionnaire.json": {
+  "errors": 51,
+  "message": "Missing required element \"linkId\"."
+ },
+ "group-questionnaire.json": {
+  "errors": 34,
+  "message": "Missing required element \"linkId\"."
+ },
+ "groupdefinition-questionnaire.json": {
+  "errors": 34,
+  "message": "Missing required element \"linkId\"."
+ },
+ "guidanceresponse-questionnaire.json": {
+  "errors": 24,
+  "message": "Missing required element \"linkId\"."
+ },
+ "hdlcholesterol-questionnaire.json": {
+  "errors": 55,
+  "message": "Missing required element \"linkId\"."
+ },
+ "headcircum-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "healthcareservice-questionnaire.json": {
+  "errors": 51,
+  "message": "Missing required element \"linkId\"."
+ },
+ "heartrate-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "hlaresult-questionnaire.json": {
+  "errors": 33,
+  "message": "Missing required element \"linkId\"."
+ },
+ "imagingstudy-questionnaire.json": {
+  "errors": 57,
+  "message": "Missing required element \"linkId\"."
+ },
+ "immunization-questionnaire.json": {
+  "errors": 64,
+  "message": "Missing required element \"linkId\"."
+ },
+ "immunizationevaluation-questionnaire.json": {
+  "errors": 22,
+  "message": "Missing required element \"linkId\"."
+ },
+ "immunizationrecommendation-questionnaire.json": {
+  "errors": 34,
+  "message": "Missing required element \"linkId\"."
+ },
+ "implementationguide-questionnaire.json": {
+  "errors": 107,
+  "message": "Missing required element \"linkId\"."
+ },
+ "insuranceplan-questionnaire.json": {
+  "errors": 81,
+  "message": "Missing required element \"linkId\"."
+ },
+ "invoice-questionnaire.json": {
+  "errors": 43,
+  "message": "Missing required element \"linkId\"."
+ },
+ "ldlcholesterol-questionnaire.json": {
+  "errors": 55,
+  "message": "Missing required element \"linkId\"."
+ },
+ "library-questionnaire.json": {
+  "errors": 43,
+  "message": "Missing required element \"linkId\"."
+ },
+ "linkage-questionnaire.json": {
+  "errors": 17,
+  "message": "Missing required element \"linkId\"."
+ },
+ "lipidprofile-questionnaire.json": {
+  "errors": 37,
+  "message": "Missing required element \"linkId\"."
+ },
+ "list-questionnaire.json": {
+  "errors": 30,
+  "message": "Missing required element \"linkId\"."
+ },
+ "location-questionnaire.json": {
+  "errors": 40,
+  "message": "Missing required element \"linkId\"."
+ },
+ "measure-questionnaire.json": {
+  "errors": 89,
+  "message": "Missing required element \"linkId\"."
+ },
+ "measurereport-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "media-questionnaire.json": {
+  "errors": 31,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medication-questionnaire.json": {
+  "errors": 29,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicationadministration-questionnaire.json": {
+  "errors": 42,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicationdispense-questionnaire.json": {
+  "errors": 46,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicationknowledge-questionnaire.json": {
+  "errors": 116,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicationrequest-questionnaire.json": {
+  "errors": 63,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicationstatement-questionnaire.json": {
+  "errors": 28,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproduct-questionnaire.json": {
+  "errors": 65,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductauthorization-questionnaire.json": {
+  "errors": 40,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductcontraindication-questionnaire.json": {
+  "errors": 21,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductindication-questionnaire.json": {
+  "errors": 23,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductingredient-questionnaire.json": {
+  "errors": 45,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductinteraction-questionnaire.json": {
+  "errors": 20,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductmanufactured-questionnaire.json": {
+  "errors": 16,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductpackaged-questionnaire.json": {
+  "errors": 38,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductpharmaceutical-questionnaire.json": {
+  "errors": 42,
+  "message": "Missing required element \"linkId\"."
+ },
+ "medicinalproductundesirableeffect-questionnaire.json": {
+  "errors": 14,
+  "message": "Missing required element \"linkId\"."
+ },
+ "messagedefinition-questionnaire.json": {
+  "errors": 49,
+  "message": "Missing required element \"linkId\"."
+ },
+ "messageheader-questionnaire.json": {
+  "errors": 42,
+  "message": "Missing required element \"linkId\"."
+ },
+ "molecularsequence-questionnaire.json": {
+  "errors": 101,
+  "message": "Missing required element \"linkId\"."
+ },
+ "namingsystem-questionnaire.json": {
+  "errors": 33,
+  "message": "Missing required element \"linkId\"."
+ },
+ "nutritionorder-questionnaire.json": {
+  "errors": 73,
+  "message": "Missing required element \"linkId\"."
+ },
+ "observation-genetics-questionnaire.json": {
+  "errors": 54,
+  "message": "Missing required element \"linkId\"."
+ },
+ "observation-questionnaire.json": {
+  "errors": 54,
+  "message": "Missing required element \"linkId\"."
+ },
+ "observationdefinition-questionnaire.json": {
+  "errors": 41,
+  "message": "Missing required element \"linkId\"."
+ },
+ "operationdefinition-questionnaire.json": {
+  "errors": 70,
+  "message": "Missing required element \"linkId\"."
+ },
+ "operationoutcome-questionnaire.json": {
+  "errors": 20,
+  "message": "Missing required element \"linkId\"."
+ },
+ "organization-questionnaire.json": {
+  "errors": 27,
+  "message": "Missing required element \"linkId\"."
+ },
+ "organizationaffiliation-questionnaire.json": {
+  "errors": 21,
+  "message": "Missing required element \"linkId\"."
+ },
+ "oxygensat-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "parameters-questionnaire.json": {
+  "errors": 120,
+  "message": "Missing required element \"linkId\"."
+ },
+ "patient-questionnaire.json": {
+  "errors": 48,
+  "message": "Missing required element \"linkId\"."
+ },
+ "paymentnotice-questionnaire.json": {
+  "errors": 21,
+  "message": "Missing required element \"linkId\"."
+ },
+ "paymentreconciliation-questionnaire.json": {
+  "errors": 42,
+  "message": "Missing required element \"linkId\"."
+ },
+ "person-questionnaire.json": {
+  "errors": 25,
+  "message": "Missing required element \"linkId\"."
+ },
+ "picoelement-questionnaire.json": {
+  "errors": 97,
+  "message": "Missing required element \"linkId\"."
+ },
+ "plandefinition-questionnaire.json": {
+  "errors": 116,
+  "message": "Missing required element \"linkId\"."
+ },
+ "practitioner-questionnaire.json": {
+  "errors": 26,
+  "message": "Missing required element \"linkId\"."
+ },
+ "practitionerrole-questionnaire.json": {
+  "errors": 36,
+  "message": "Missing required element \"linkId\"."
+ },
+ "procedure-questionnaire.json": {
+  "errors": 48,
+  "message": "Missing required element \"linkId\"."
+ },
+ "provenance-questionnaire.json": {
+  "errors": 35,
+  "message": "Missing required element \"linkId\"."
+ },
+ "provenance-relevant-history-questionnaire.json": {
+  "errors": 44,
+  "message": "Missing required element \"linkId\"."
+ },
+ "questionnaire-questionnaire.json": {
+  "errors": 72,
+  "message": "Missing required element \"linkId\"."
+ },
+ "questionnaireresponse-extensions-QuestionnaireResponse-item-subject.json": {
+  "errors": 1,
+  "message": "\"questionnaireresponse-extensions-QuestionnaireResponse-item-subject\" is not a valid id. Expected 1 to 64 letters, digits, hyphens or dots."
+ },
+ "questionnaireresponse-questionnaire.json": {
+  "errors": 36,
+  "message": "Missing required element \"linkId\"."
+ },
+ "relatedperson-questionnaire.json": {
+  "errors": 27,
+  "message": "Missing required element \"linkId\"."
+ },
+ "requestgroup-questionnaire.json": {
+  "errors": 62,
+  "message": "Missing required element \"linkId\"."
+ },
+ "researchdefinition-questionnaire.json": {
+  "errors": 46,
+  "message": "Missing required element \"linkId\"."
+ },
+ "researchelementdefinition-questionnaire.json": {
+  "errors": 97,
+  "message": "Missing required element \"linkId\"."
+ },
+ "researchstudy-questionnaire.json": {
+  "errors": 45,
+  "message": "Missing required element \"linkId\"."
+ },
+ "researchsubject-questionnaire.json": {
+  "errors": 18,
+  "message": "Missing required element \"linkId\"."
+ },
+ "resprate-questionnaire.json": {
+  "errors": 56,
+  "message": "Missing required element \"linkId\"."
+ },
+ "riskassessment-questionnaire.json": {
+  "errors": 36,
+  "message": "Missing required element \"linkId\"."
+ },
+ "riskevidencesynthesis-questionnaire.json": {
+  "errors": 78,
+  "message": "Missing required element \"linkId\"."
+ },
+ "schedule-questionnaire.json": {
+  "errors": 17,
+  "message": "Missing required element \"linkId\"."
+ },
+ "searchparameter-questionnaire.json": {
+  "errors": 43,
+  "message": "Missing required element \"linkId\"."
+ },
+ "servicerequest-genetics-questionnaire.json": {
+  "errors": 42,
+  "message": "Missing required element \"linkId\"."
+ },
+ "servicerequest-questionnaire.json": {
+  "errors": 42,
+  "message": "Missing required element \"linkId\"."
+ },
+ "shareableactivitydefinition-questionnaire.json": {
+  "errors": 71,
+  "message": "Missing required element \"linkId\"."
+ },
+ "shareablecodesystem-questionnaire.json": {
+  "errors": 74,
+  "message": "Missing required element \"linkId\"."
+ },
+ "shareablelibrary-questionnaire.json": {
+  "errors": 43,
+  "message": "Missing required element \"linkId\"."
+ },
+ "shareablemeasure-questionnaire.json": {
+  "errors": 89,
+  "message": "Missing required element \"linkId\"."
+ },
+ "shareableplandefinition-questionnaire.json": {
+  "errors": 116,
+  "message": "Missing required element \"linkId\"."
+ },
+ "shareablevalueset-questionnaire.json": {
+  "errors": 96,
+  "message": "Missing required element \"linkId\"."
+ },
+ "slot-questionnaire.json": {
+  "errors": 20,
+  "message": "Missing required element \"linkId\"."
+ },
+ "specimen-questionnaire.json": {
+  "errors": 48,
+  "message": "Missing required element \"linkId\"."
+ },
+ "specimendefinition-questionnaire.json": {
+  "errors": 48,
+  "message": "Missing required element \"linkId\"."
+ },
+ "structuredefinition-questionnaire.json": {
+  "errors": 58,
+  "message": "Missing required element \"linkId\"."
+ },
+ "structuremap-questionnaire.json": {
+  "errors": 202,
+  "message": "Missing required element \"linkId\"."
+ },
+ "subscription-questionnaire.json": {
+  "errors": 23,
+  "message": "Missing required element \"linkId\"."
+ },
+ "substance-questionnaire.json": {
+  "errors": 27,
+  "message": "Missing required element \"linkId\"."
+ },
+ "substancenucleicacid-questionnaire.json": {
+  "errors": 38,
+  "message": "Missing required element \"linkId\"."
+ },
+ "substancepolymer-questionnaire.json": {
+  "errors": 53,
+  "message": "Missing required element \"linkId\"."
+ },
+ "substanceprotein-questionnaire.json": {
+  "errors": 24,
+  "message": "Missing required element \"linkId\"."
+ },
+ "substancereferenceinformation-questionnaire.json": {
+  "errors": 44,
+  "message": "Missing required element \"linkId\"."
+ },
+ "substancesourcematerial-questionnaire.json": {
+  "errors": 63,
+  "message": "Missing required element \"linkId\"."
+ },
+ "substancespecification-questionnaire.json": {
+  "errors": 115,
+  "message": "Missing required element \"linkId\"."
+ },
+ "supplydelivery-questionnaire.json": {
+  "errors": 25,
+  "message": "Missing required element \"linkId\"."
+ },
+ "supplyrequest-questionnaire.json": {
+  "errors": 29,
+  "message": "Missing required element \"linkId\"."
+ },
+ "synthesis-questionnaire.json": {
+  "errors": 41,
+  "message": "Missing required element \"linkId\"."
+ },
+ "task-questionnaire.json": {
+  "errors": 266,
+  "message": "Missing required element \"linkId\"."
+ },
+ "terminologycapabilities-questionnaire.json": {
+  "errors": 92,
+  "message": "Missing required element \"linkId\"."
+ },
+ "testreport-questionnaire.json": {
+  "errors": 70,
+  "message": "Missing required element \"linkId\"."
+ },
+ "testscript-questionnaire.json": {
+  "errors": 170,
+  "message": "Missing required element \"linkId\"."
+ },
+ "triglyceride-questionnaire.json": {
+  "errors": 55,
+  "message": "Missing required element \"linkId\"."
+ },
+ "valueset-extensions-ValueSet-author.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "valueset-extensions-ValueSet-effective.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "valueset-extensions-ValueSet-end.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "valueset-extensions-ValueSet-keyword.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "valueset-extensions-ValueSet-workflow.json": {
+  "errors": 1,
+  "message": "Missing required element \"base\"."
+ },
+ "valueset-questionnaire.json": {
+  "errors": 96,
+  "message": "Missing required element \"linkId\"."
+ },
+ "verificationresult-questionnaire.json": {
+  "errors": 50,
+  "message": "Missing required element \"linkId\"."
+ },
+ "visionprescription-questionnaire.json": {
+  "errors": 39,
+  "message": "Missing required element \"linkId\"."
+ },
+ "vitalsigns-questionnaire.json": {
+  "errors": 55,
+  "message": "Missing required element \"linkId\"."
+ },
+ "vitalspanel-questionnaire.json": {
+  "errors": 55,
+  "message": "Missing required element \"linkId\"."
+ }
+}

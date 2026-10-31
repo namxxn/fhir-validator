@@ -1,0 +1,4 @@
+dist/
+src/definitions/
+tests/fixtures/
+package-lock.json
