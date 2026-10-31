@@ -1,8 +1,7 @@
-/** Mistakes here are deliberate: one per kind of problem a first-time visitor should see caught. */
 export const EXAMPLE_RESOURCE = `{
   "resourceType": "Patient",
   "id": "example",
-  "active": "true",
+  "active": true,
   "name": [
     {
       "use": "official",
@@ -10,13 +9,30 @@ export const EXAMPLE_RESOURCE = `{
       "given": ["Peter", "James"]
     }
   ],
-  "gender": "Male",
-  "birthdate": "1974-12-25",
-  "deceasedDateTime": "2026-02-30T10:00:00Z",
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "(03) 5555 6473",
+      "use": "work"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1974-12-25",
+  "address": [
+    {
+      "use": "home",
+      "line": ["534 Erewhon St"],
+      "city": "PleasantVille",
+      "state": "Vic",
+      "postalCode": "3999"
+    }
+  ],
   "maritalStatus": {
     "coding": [
       {
-        "code": "M"
+        "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+        "code": "M",
+        "display": "Married"
       }
     ]
   }

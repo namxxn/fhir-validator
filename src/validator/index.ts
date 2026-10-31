@@ -1,5 +1,5 @@
 import r4 from '../definitions/r4.json';
-import { parseJson } from './json';
+import { findMember, isStackOverflow, parseJson, stringValue } from './json';
 import { report, validateResource } from './resource';
 import type { Context } from './resource';
 import type { Definitions, Issue } from './types';
@@ -15,6 +15,12 @@ function byPosition(a: Issue, b: Issue): number {
 
 function singleError(message: string, line = 1, column = 1): Issue[] {
   return [{ severity: 'error', message, path: '', line, column }];
+}
+
+export function declaredResourceType(text: string): string | undefined {
+  const parsed = parseJson(text);
+  if ('problem' in parsed || parsed.document.body.type !== 'Object') return undefined;
+  return stringValue(findMember(parsed.document.body, 'resourceType')?.value);
 }
 
 export function validate(text: string): Issue[] {
@@ -37,7 +43,7 @@ export function validate(text: string): Issue[] {
     return context.issues.sort(byPosition);
   } catch (error) {
     // Extreme nesting exhausts the call stack; that must not take the page down with it.
-    if (error instanceof RangeError) {
+    if (isStackOverflow(error)) {
       return singleError('This document is nested too deeply to check.');
     }
     throw error;

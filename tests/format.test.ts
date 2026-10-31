@@ -22,6 +22,15 @@ describe('formatJson', () => {
     expect(formatJson('{"a":"\\u00e9\\n"}')).toBe('{\n  "a": "\\u00e9\\n"\n}\n');
   });
 
+  it('drops a byte order mark', () => {
+    expect(formatJson('\ufeff{"a":1}')).toBe('{\n  "a": 1\n}\n');
+  });
+
+  it('returns null when nesting is too deep to walk', () => {
+    const depth = 200_000;
+    expect(formatJson('['.repeat(depth) + ']'.repeat(depth))).toBeNull();
+  });
+
   it('returns null for invalid JSON', () => {
     expect(formatJson('{')).toBeNull();
   });

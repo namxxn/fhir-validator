@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="light" />
     <!--
       Stated in the document so it holds on any host. connect-src 'none' is the load-bearing line:
       it makes the promise that nothing leaves the browser enforceable by the browser itself.
@@ -16,15 +16,19 @@
     <title>FHIR Validator: Free Online HL7® FHIR® R4 Resource Validator | Medblocks</title>
     <meta
       name="description"
-      content="Free online validator for HL7® FHIR® R4 resources in JSON. Paste a resource and get a clear list of problems with paths and line numbers; nothing is uploaded."
+      content="Check HL7® FHIR® R4 resources in JSON for free in your browser. See each problem with its path and line number. Nothing is uploaded."
     />
     <link rel="canonical" href="https://medblocks.com/tools/fhir-validator/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1918" />
-    <link rel="icon" href="/tools/fhir-validator/favicon.ico" sizes="32x32" />
-    <link rel="icon" type="image/svg+xml" href="/tools/fhir-validator/favicon.svg" />
-    <link rel="apple-touch-icon" href="/tools/fhir-validator/icon-192.png" />
+    <meta id="theme-color" name="theme-color" content="#ffffff" />
+    <!--
+      A separate, blocking script because the policy forbids inline ones and the app's own module
+      runs after the first paint, which would flash light before a saved dark choice applied.
+    -->
+    <script src="/theme.js"></script>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Medblocks" />
     <meta property="og:locale" content="en_US" />
@@ -35,7 +39,7 @@
     />
     <meta
       property="og:description"
-      content="Free online validator for HL7® FHIR® R4 resources in JSON. Paste a resource and get a clear list of problems with paths and line numbers; nothing is uploaded."
+      content="Check HL7® FHIR® R4 resources in JSON for free in your browser. See each problem with its path and line number. Nothing is uploaded."
     />
     <meta property="og:image" content="https://medblocks.com/tools/fhir-validator/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -77,6 +81,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="/src/styles.css" />
     <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
@@ -99,14 +104,52 @@
         </svg>
         <h1 class="brand-name">FHIR Validator</h1>
         <span class="divider" aria-hidden="true"></span>
-        <p class="tagline">Check HL7® FHIR® R4 resources in JSON, right in your browser.</p>
+        <p class="tagline">Check HL7® FHIR® R4 resources in JSON</p>
+        <div class="topbar-actions">
+          <a class="button" href="/tools/fhir-validator/how-to-use/">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <path d="M12 17h.01" />
+            </svg>
+            How to use
+          </a>
+          <button
+            id="theme"
+            type="button"
+            class="button button-icon"
+            aria-label="Switch to dark mode"
+            data-tip="Switch to dark mode"
+            hidden
+          >
+            <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+            <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </button>
+        </div>
       </header>
 
       <div id="tool" class="panels" hidden>
         <section class="panel" aria-label="Resource editor">
           <div class="panel-head">
             <div class="toolbar" role="toolbar" aria-label="Editor actions">
-              <button id="open" type="button" class="button">
+              <button
+                id="open"
+                data-tip="Open a .json file from your computer"
+                type="button"
+                class="button"
+              >
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="17 8 12 3 7 8" />
@@ -114,7 +157,12 @@
                 </svg>
                 Open file
               </button>
-              <button id="example" type="button" class="button">
+              <button
+                id="example"
+                data-tip="Try it with a sample Patient"
+                type="button"
+                class="button"
+              >
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
                   <path d="M14 2v4a2 2 0 0 0 2 2h4" />
@@ -124,7 +172,7 @@
                 </svg>
                 Load example
               </button>
-              <button id="format" type="button" class="button">
+              <button id="format" data-tip="Tidy up the spacing" type="button" class="button">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                   <line x1="21" x2="3" y1="6" y2="6" />
                   <line x1="15" x2="3" y1="12" y2="12" />
@@ -132,7 +180,7 @@
                 </svg>
                 Format
               </button>
-              <button id="clear" type="button" class="button">
+              <button id="clear" data-tip="Empty the editor" type="button" class="button">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"
@@ -142,7 +190,12 @@
                 </svg>
                 Clear
               </button>
-              <button id="validate" type="button" class="button button-primary">
+              <button
+                id="validate"
+                data-tip="Check for problems (Ctrl/Cmd + Enter)"
+                type="button"
+                class="button button-primary"
+              >
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
@@ -167,14 +220,24 @@
       </div>
 
       <div id="boot" class="boot">
+        <p>
+          A free validator for HL7® FHIR® R4 resources in JSON. It runs in your browser. Paste or
+          open a resource to see each problem with its element path and line number.
+        </p>
+        <h2>Nothing is uploaded</h2>
+        <p>
+          The validator runs on this device. The content security policy on this page blocks all
+          outbound connections, so nothing you open can leave.
+        </p>
         <div role="alert">
           <h2>The validator has not finished loading</h2>
           <p>
-            If this is all there is to see, a file failed to download or this browser is older than
-            the validator supports. Reloading is worth trying first; a current version of Chrome,
-            Firefox, Safari or Edge will run it.
+            A file may have failed to download, or this browser may be too old. Reload the page
+            first. If the problem continues, use a current version of Chrome, Firefox, Safari or
+            Edge.
           </p>
         </div>
+        <p><a href="/tools/fhir-validator/how-to-use/">How to use FHIR Validator</a></p>
       </div>
       <noscript>
         <p class="boot-noscript">
@@ -194,50 +257,10 @@
           Local only
         </span>
       </footer>
-    </div>
-
-    <main class="article">
-      <section>
-        <h2>Nothing is uploaded</h2>
-        <p>
-          Resources are read and validated on this device. Nothing you paste or open is sent
-          anywhere, and the content security policy on this page is what enforces that rather than
-          merely stating it: the page is not permitted to make any outbound connection.
-        </p>
-      </section>
-      <section>
-        <h2>What it checks</h2>
-        <p>Every rule comes from the official HL7® FHIR® R4 (4.0.1) definition files.</p>
-        <ul>
-          <li>JSON syntax, with the line and column of the problem.</li>
-          <li>That <code>resourceType</code> is present and is a real R4 resource type.</li>
-          <li>Unknown elements, with a suggestion when there is an obvious near match.</li>
-          <li>Cardinality: required elements, and arrays versus single values.</li>
-          <li>Data types, recursively through complex types such as HumanName and Identifier.</li>
-          <li>Primitive formats, including real calendar dates.</li>
-          <li>Choice elements: at most one present, and only an allowed type.</li>
-          <li>Codes for elements with a required binding, where the spec fully lists the codes.</li>
-          <li>JSON rules: no nulls or empty values, and correct primitive extensions.</li>
-          <li>
-            Nested resources: contained resources, bundle entries and any other resource element.
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h2>What it doesn't check</h2>
-        <p>
-          It does not evaluate FHIRPath invariants, look up terminology (whether a LOINC or SNOMED
-          code exists), or check profiles and implementation guides such as US Core. It reads JSON
-          only, not XML, and covers R4 only. For full conformance checks, use the
-          <a href="https://validator.fhir.org/" rel="noopener">official HL7® validator</a>.
-        </p>
-      </section>
-      <footer class="legal">
-        <p>
-          HL7® and FHIR® are the registered trademarks of Health Level Seven International and the
-          use of these trademarks does not constitute an endorsement by HL7.
-        </p>
+      <footer class="legal-bar">
+        HL7® and FHIR® are the registered trademarks of Health Level Seven International and the use
+        of these trademarks does not constitute an endorsement by HL7.
       </footer>
-    </main>
+    </div>
   </body>
 </html>

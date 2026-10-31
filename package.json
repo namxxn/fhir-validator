@@ -2,7 +2,7 @@
   "name": "fhir-validator",
   "version": "1.0.0",
   "private": true,
-  "description": "Browser-based validator for HL7® FHIR® R4 JSON resources",
+  "description": "Browser-based validator for HL7\u00ae FHIR\u00ae R4 JSON resources",
   "type": "module",
   "engines": {
     "node": ">=22.18"
@@ -37,5 +37,8 @@
     "typescript-eslint": "^8.72.1",
     "vite": "^8.3.5",
     "vitest": "^5.0.5"
+  },
+  "overrides": {
+    "minimatch": "^11.0.1"
   }
 }

@@ -17,14 +17,14 @@ import {
 import { tags } from '@lezer/highlight';
 import type { Issue } from '../validator';
 
-export interface EditorHandlers {
+interface EditorHandlers {
   onValidate: () => void;
   onChange: (changes: ChangeDesc) => void;
   onCursor: (line: number, column: number) => void;
   onFile: (file: File) => void;
 }
 
-export interface Editor {
+interface Editor {
   getText: () => string;
   setText: (text: string) => void;
   showIssues: (issues: Issue[]) => number[];
@@ -64,8 +64,13 @@ const theme = EditorView.theme({
     fontSize: '14px',
   },
   '&.cm-focused': { outline: 'none' },
-  '.cm-scroller': { fontFamily: 'var(--font-mono)', lineHeight: '1.6' },
-  '.cm-content': { caretColor: 'hsl(var(--text))' },
+  '.cm-scroller': { fontFamily: 'var(--font-mono)', lineHeight: '22px' },
+  '.cm-content': { padding: '8px 0', caretColor: 'hsl(var(--text))' },
+  '.cm-line': { padding: '0' },
+  '.cm-lineNumbers .cm-gutterElement': { minWidth: '42px', padding: '0', textAlign: 'right' },
+  '.cm-gutter-lint': { width: '26px' },
+  '.cm-gutter-lint .cm-gutterElement': { padding: '0 0 0 6px' },
+  '.cm-lint-marker': { marginTop: '4px' },
   '.cm-cursor': { borderLeftColor: 'hsl(var(--text))' },
   '.cm-gutters': {
     backgroundColor: 'hsl(var(--surface))',

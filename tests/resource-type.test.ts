@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validate } from '../src/validator';
+import { declaredResourceType, validate } from '../src/validator';
 
 describe('resourceType', () => {
   it('rejects a document that is not an object', () => {
@@ -55,5 +55,16 @@ describe('resourceType', () => {
       message: '"resourceType" must be a string.',
       path: 'resourceType',
     });
+  });
+
+  it.each([
+    ['{"resourceType": "Patient"}', 'Patient'],
+    ['\ufeff{"resourceType": "Patient"}', 'Patient'],
+    ['{"id": "a"}', undefined],
+    ['{"resourceType": 3}', undefined],
+    ['[1]', undefined],
+    ['{', undefined],
+  ])('reads the declared type of %s', (text, expected) => {
+    expect(declaredResourceType(text)).toBe(expected);
   });
 });

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>How to Use the FHIR Validator | Medblocks</title>
+    <meta
+      name="description"
+      content="How to check HL7® FHIR® R4 resources with the free FHIR Validator from Medblocks. See what it checks, what it does not check, and why nothing is uploaded."
+    />
+    <link rel="canonical" href="https://medblocks.com/tools/fhir-validator/how-to-use/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta id="theme-color" name="theme-color" content="#ffffff" />
+    <script src="/theme.js"></script>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Medblocks" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://medblocks.com/tools/fhir-validator/how-to-use/" />
+    <meta property="og:title" content="How to Use the FHIR Validator" />
+    <meta
+      property="og:description"
+      content="How to check HL7® FHIR® R4 resources with the free FHIR Validator from Medblocks. See what it checks, what it does not check, and why nothing is uploaded."
+    />
+    <meta property="og:image" content="https://medblocks.com/tools/fhir-validator/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="FHIR Validator from Medblocks" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Medblocks_" />
+    <meta name="twitter:creator" content="@Medblocks_" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <svg
+        class="brand-mark"
+        viewBox="0 0 48 48"
+        fill="currentColor"
+        role="img"
+        aria-label="Medblocks"
+      >
+        <rect x="7.07" y="10.78" width="13.59" height="13.59" rx="3" ry="3" />
+        <path
+          d="M34.11,24.38h-7.58c-1.66,0-3-1.35-3-3v-7.58c0-1.66,1.35-3,3-3h7.58c1.66,0,3,1.35,3,3v7.58c0,1.66-1.35,3-3,3ZM26.52,12.22c-.87,0-1.57.71-1.57,1.57v7.58c0,.87.71,1.57,1.57,1.57h7.58c.87,0,1.57-.71,1.57-1.57v-7.58c0-.87-.71-1.57-1.57-1.57h-7.58Z"
+        />
+        <rect x="27.33" y="6.97" width="13.59" height="13.59" rx="3" ry="3" />
+        <rect x="7.07" y="27.24" width="13.59" height="13.59" rx="3" ry="3" />
+        <rect x="23.52" y="27.24" width="13.59" height="13.59" rx="3" ry="3" />
+      </svg>
+      <span class="brand-name">FHIR Validator</span>
+      <div class="topbar-actions">
+        <a class="button" href="/tools/fhir-validator/">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m12 19-7-7 7-7" />
+            <path d="M19 12H5" />
+          </svg>
+          Back to the validator
+        </a>
+      </div>
+    </header>
+
+    <main class="article">
+      <h1>How to use the FHIR Validator</h1>
+      <p class="article-intro">
+        The FHIR Validator checks HL7® FHIR® R4 resources in JSON. It runs in your browser. Nothing
+        you paste or open is uploaded.
+      </p>
+      <section>
+        <h2>Checking a resource</h2>
+        <ul>
+          <li>
+            Paste a resource into the editor, or use <strong>Open file</strong> for a .json file.
+          </li>
+          <li>You can also drag a file onto the editor.</li>
+          <li><strong>Load example</strong> loads a valid R4 Patient. Use it to try the tool.</li>
+          <li>Choose <strong>Validate</strong>, or press Ctrl+Enter (Cmd+Enter on a Mac).</li>
+          <li>
+            <strong>Format</strong> tidies the indentation, and <strong>Clear</strong> empties the
+            editor.
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Reading the results</h2>
+        <p>
+          The summary at the top shows that the resource is valid, or it shows the number of errors
+          and warnings. Each problem below the summary shows a message, the element path and the
+          line number. Click a problem to go to that line in the editor. Markers beside the line
+          numbers show the same problems.
+        </p>
+        <p>
+          An error means that the resource breaks the specification. The tool has only two warnings:
+          a Coding with a code but no system, and a Quantity with a value but no unit or code.
+        </p>
+      </section>
+      <section>
+        <h2>Nothing is uploaded</h2>
+        <p>
+          The validator runs on this device. The content security policy on this page blocks all
+          outbound connections, so nothing you paste or open can leave.
+        </p>
+      </section>
+      <section>
+        <h2>What it checks</h2>
+        <p>The rules come from the official HL7® FHIR® R4 (4.0.1) definition files.</p>
+        <ul>
+          <li>JSON syntax, with the line and column of the problem.</li>
+          <li>That <code>resourceType</code> is present and is a real R4 resource type.</li>
+          <li>Unknown elements, with a suggestion when there is an obvious near match.</li>
+          <li>Cardinality: required elements, and arrays versus single values.</li>
+          <li>Data types, recursively through complex types such as HumanName and Identifier.</li>
+          <li>Primitive formats, including real calendar dates.</li>
+          <li>Choice elements: at most one present, and only an allowed type.</li>
+          <li>Codes for elements with a required binding, where the spec fully lists the codes.</li>
+          <li>JSON rules: no nulls or empty values, and correct primitive extensions.</li>
+          <li>
+            Nested resources: contained resources, bundle entries and any other resource element.
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>What it does not check</h2>
+        <p>
+          It does not check FHIRPath invariants, terminology (for example, whether a LOINC or SNOMED
+          code exists), or profiles and implementation guides such as US Core. It reads JSON, not
+          XML, and it covers R4 only. For full conformance checks, use the
+          <a href="https://validator.fhir.org/" rel="noopener noreferrer">official HL7® validator</a
+          >.
+        </p>
+      </section>
+      <footer class="legal">
+        <p>
+          HL7® and FHIR® are the registered trademarks of Health Level Seven International and the
+          use of these trademarks does not constitute an endorsement by HL7.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,8 +1,8 @@
-import './styles.css';
 import { EXAMPLE_RESOURCE } from './ui/example';
 import { createEditor } from './ui/editor';
 import { createResults } from './ui/results';
-import { formatJson, validate } from './validator';
+import { setUpThemeToggle } from './ui/theme';
+import { declaredResourceType, formatJson, validate } from './validator';
 
 function requireElement<T extends HTMLElement>(id: string): T {
   const element = document.getElementById(id);
@@ -12,9 +12,11 @@ function requireElement<T extends HTMLElement>(id: string): T {
   return element as T;
 }
 
-function declaredResourceType(text: string): string | undefined {
-  const parsed = JSON.parse(text) as { resourceType?: string };
-  return parsed.resourceType;
+/** The tips are drawn by CSS, which screen readers do not reliably announce. */
+function describeTips(): void {
+  for (const element of document.querySelectorAll<HTMLElement>('[data-tip]')) {
+    element.setAttribute('aria-description', element.dataset.tip ?? '');
+  }
 }
 
 function start(): void {
@@ -82,12 +84,15 @@ function start(): void {
   });
   requireElement('example').addEventListener('click', () => {
     setDocument(EXAMPLE_RESOURCE);
-    runValidation();
+    resetResults();
   });
   requireElement('format').addEventListener('click', () => {
+    const hadResults = hasResults;
     const formatted = formatJson(editor.getText());
     if (formatted !== null) setDocument(formatted);
-    runValidation();
+    // Reformatting moves every line, so results already on screen have to be refreshed. Broken JSON
+    // cannot be formatted, and the syntax error is what explains why nothing happened.
+    if (hadResults || formatted === null) runValidation();
   });
   requireElement('clear').addEventListener('click', () => {
     setDocument('');
@@ -96,6 +101,8 @@ function start(): void {
   });
   requireElement('validate').addEventListener('click', runValidation);
 
+  setUpThemeToggle(requireElement('theme'), requireElement('theme-color'));
+  describeTips();
   results.showEmpty();
   requireElement('boot').remove();
   requireElement('tool').hidden = false;

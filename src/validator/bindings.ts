@@ -1,12 +1,8 @@
+import { summarizeList } from './text';
 import type { CodeList } from './types';
 
-const MAX_CODES_SHOWN = 8;
-
 export function describeAllowedCodes(lists: CodeList[]): string {
-  const codes = lists.flatMap((list) => list.codes);
-  const shown = codes.slice(0, MAX_CODES_SHOWN).join(', ');
-  const remaining = codes.length - MAX_CODES_SHOWN;
-  return remaining > 0 ? `${shown} and ${remaining} more` : shown;
+  return summarizeList(lists.flatMap((list) => list.codes));
 }
 
 export function includesCode(lists: CodeList[], code: string): boolean {

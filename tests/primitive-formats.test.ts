@@ -24,6 +24,7 @@ describe('primitive formats', () => {
     ['multipleBirthInteger', '2147483648', 'too large for integer'],
     ['implicitRules', '"has space"', '"has space" is not a valid uri.'],
     ['language', '"has  two  spaces"', 'is not a valid code.'],
+    ['language', '"en\u00a0"', 'is not a valid code.'],
   ])('rejects %s = %s', (element, json, expected) => {
     const issues = validate(patientWith(element, json));
     expect(issues).toHaveLength(1);
@@ -42,6 +43,37 @@ describe('primitive formats', () => {
   it('checks base64Binary', () => {
     const text = '{"resourceType": "Binary", "contentType": "text/plain", "data": "@@@@"}';
     expect(validate(text)[0]?.path).toBe('Binary.data');
+  });
+
+  it.each(['QQ==QUJD', '=QQ=', 'Q===', 'QUJ'])('rejects badly padded base64 %s', (data) => {
+    const text = `{"resourceType": "Binary", "contentType": "a/b", "data": "${data}"}`;
+    expect(validate(text)[0]?.message).toContain('is not a valid base64Binary');
+  });
+
+  it.each(['QUJD', 'QQ==', 'QUI=', 'QU JD\\nQUJD'])('accepts base64 %s', (data) => {
+    const text = `{"resourceType": "Binary", "contentType": "a/b", "data": "${data}"}`;
+    expect(validate(text)).toEqual([]);
+  });
+
+  it.each([
+    ['urn:oid:9.9', 'is not a valid oid'],
+    ['urn:uuid:C757873D-EC9A-4326-A141-556F43239520', 'is not a valid uuid'],
+  ])('holds the uri %s to its own format', (system, expected) => {
+    const text = `{"resourceType": "Patient", "identifier": [{"system": "${system}"}]}`;
+    expect(validate(text)[0]).toMatchObject({
+      path: 'Patient.identifier[0].system',
+      message: expect.stringContaining(expected),
+    });
+  });
+
+  it.each([
+    'urn:oid:1.2.3',
+    'urn:uuid:c757873d-ec9a-4326-a141-556f43239520',
+    'urn:uuid:c757873d-ec9a-4326-a141-556f43239520|1.0',
+    'urn:other:THING',
+  ])('accepts the uri %s', (system) => {
+    const text = `{"resourceType": "Patient", "identifier": [{"system": "${system}"}]}`;
+    expect(validate(text)).toEqual([]);
   });
 
   it('checks positiveInt', () => {
@@ -71,6 +103,14 @@ describe('primitive formats', () => {
       const text = `{"resourceType": "Observation", "status": "final", "code": {"text": "x"}, "valueQuantity": {"value": ${value}, "unit": "mg"}}`;
       expect(validate(text)).toEqual([]);
     }
+  });
+
+  it('accepts very long strings and codes without failing', () => {
+    const family = 'a '.repeat(1_000_000);
+    const name = `{"resourceType": "Patient", "name": [{"family": "${family}x"}]}`;
+    expect(validate(name)).toEqual([]);
+    const coded = `{"resourceType": "Binary", "contentType": "${family}x"}`;
+    expect(validate(coded)).toEqual([]);
   });
 
   it('accepts non-breaking spaces in strings, as the Java-flavoured spec regexes do', () => {

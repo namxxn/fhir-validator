@@ -53,16 +53,21 @@ describe('cardinality', () => {
 
   it('accepts a required element that only has a primitive extension', () => {
     const text = JSON.stringify({
-      resourceType: 'Observation',
-      _status: {
-        extension: [
-          {
-            url: 'http://hl7.org/fhir/StructureDefinition/data-absent-reason',
-            valueCode: 'unknown',
+      resourceType: 'Questionnaire',
+      status: 'draft',
+      item: [
+        {
+          _linkId: {
+            extension: [
+              {
+                url: 'http://hl7.org/fhir/StructureDefinition/data-absent-reason',
+                valueCode: 'unknown',
+              },
+            ],
           },
-        ],
-      },
-      code: { text: 'Weight' },
+          type: 'group',
+        },
+      ],
     });
     expect(validate(text)).toEqual([]);
   });

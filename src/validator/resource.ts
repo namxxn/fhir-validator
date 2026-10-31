@@ -3,11 +3,13 @@ import { findMember, memberName, sourceText, stringValue } from './json';
 import type { MemberNode, ObjectNode, ValueNode } from './json';
 import { findFormatProblem } from './primitives';
 import { closestName } from './suggest';
-import type { Definitions, ElementDefinition, Issue, Severity, Structure } from './types';
+import { summarizeList } from './text';
+import type { CodeList, Definitions, ElementDefinition, Issue, Severity, Structure } from './types';
 
 const CHOICE_SUFFIX = '[x]';
 const EXTENSION_PREFIX = '_';
-const MAX_CHOICES_SHOWN = 8;
+const CROSS_VERSION_EXTENSION =
+  /^http:\/\/hl7\.org\/fhir\/[0-9.]+\/StructureDefinition\/extension-/;
 const QUANTITY_TYPES = new Set(['Quantity', 'Age', 'Count', 'Distance', 'Duration']);
 
 export interface Context {
@@ -31,7 +33,7 @@ interface ElementGroup {
 
 export function report(
   context: Context,
-  node: ValueNode | MemberNode['name'] | ObjectNode,
+  node: ValueNode | MemberNode['name'],
   severity: Severity,
   path: string,
   message: string,
@@ -89,12 +91,6 @@ function knownNames(structure: Structure): string[] {
   );
 }
 
-function listChoices(names: string[]): string {
-  const shown = names.slice(0, MAX_CHOICES_SHOWN).join(', ');
-  const remaining = names.length - MAX_CHOICES_SHOWN;
-  return remaining > 0 ? `${shown} and ${remaining} more` : shown;
-}
-
 function findChoiceKey(structure: Structure, name: string): string | undefined {
   return Object.keys(structure).find((key) => {
     if (!isChoiceKey(key)) return false;
@@ -118,7 +114,7 @@ function reportUnknownElement(
       context,
       member.name,
       `${path}.${rawName}`,
-      `"${rawName}" is not an allowed type for ${choiceKey}. Allowed: ${listChoices(choiceNames(choiceKey, choice))}.`,
+      `"${rawName}" is not an allowed type for ${choiceKey}. Allowed: ${summarizeList(choiceNames(choiceKey, choice))}.`,
     );
     return;
   }
@@ -311,12 +307,29 @@ function validateItem(context: Context, resolved: ResolvedElement, item: ItemPai
     reportError(context, extension, extensionPath, 'Expected an object with id or extension.');
     return;
   }
+  const lists = codeListsFor(context, resolved.definition);
+  if (lists && (!value || valueIsNull) && !hasCrossVersionExtension(extension)) {
+    reportError(
+      context,
+      extension,
+      extensionPath,
+      `A code is required here, but there is only an extension. Allowed: ${describeAllowedCodes(lists)}.`,
+    );
+  }
   validateObject(
     context,
     extension,
     context.definitions.structures['Element'] ?? {},
     extensionPath,
   );
+}
+
+/** The official validator accepts a code from another FHIR version carried this way. */
+function hasCrossVersionExtension(node: ObjectNode): boolean {
+  return itemsOf(findMember(node, 'extension')).some((item) => {
+    const url = item?.type === 'Object' ? stringValue(findMember(item, 'url')?.value) : undefined;
+    return url !== undefined && CROSS_VERSION_EXTENSION.test(url);
+  });
 }
 
 function validateObject(
@@ -434,7 +447,7 @@ function validatePrimitive(
     return;
   }
   const value = node.type === 'String' ? node.value : sourceText(context.text, node);
-  const problem = findFormatProblem(type, definition, value);
+  const problem = findFormatProblem(type, context.definitions.primitives, value);
   if (problem) {
     reportError(context, node, path, problem);
     return;
@@ -442,7 +455,7 @@ function validatePrimitive(
   checkCode(context, node, resolved, value, path);
 }
 
-function codeListsFor(context: Context, definition: ElementDefinition) {
+function codeListsFor(context: Context, definition: ElementDefinition): CodeList[] | undefined {
   return definition.codes === undefined
     ? undefined
     : context.definitions.valueSets[definition.codes];
@@ -473,27 +486,22 @@ function checkCodedObject(
   path: string,
 ): void {
   const lists = codeListsFor(context, definition);
-  if (!lists) return;
-  const codings = type === 'Coding' ? [node] : type === 'CodeableConcept' ? codingsOf(node) : [];
+  if (!lists || !node.members.length) return;
+  if (type !== 'Coding' && type !== 'CodeableConcept') return;
+  const codings = type === 'Coding' ? [node] : codingsOf(node);
   const complete = codings.flatMap((coding) => {
     const system = stringValue(findMember(coding, 'system')?.value);
     const code = stringValue(findMember(coding, 'code')?.value);
     return system !== undefined && code !== undefined ? [{ system, code }] : [];
   });
-  // A coding with no system or code cannot be judged here; other checks and warnings cover it.
-  if (
-    !complete.length ||
-    complete.some(({ system, code }) => includesCoding(lists, system, code))
-  ) {
+  if (complete.some(({ system, code }) => includesCoding(lists, system, code))) {
     return;
   }
   const first = complete[0];
-  reportError(
-    context,
-    node,
-    path,
-    `"${first?.code}" from ${first?.system} is not an allowed code. Allowed: ${describeAllowedCodes(lists)}.`,
-  );
+  const problem = first
+    ? `"${first.code}" from ${first.system} is not an allowed code.`
+    : 'A code is required here, with both a system and a code.';
+  reportError(context, node, path, `${problem} Allowed: ${describeAllowedCodes(lists)}.`);
 }
 
 function codingsOf(node: ObjectNode): ObjectNode[] {

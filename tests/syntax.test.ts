@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { validate } from '../src/validator';
+import { isStackOverflow } from '../src/validator/json';
 
 describe('JSON syntax', () => {
   it('reports the line and column of a syntax error', () => {
@@ -10,6 +11,18 @@ describe('JSON syntax', () => {
         path: '',
         line: 3,
         column: 12,
+      },
+    ]);
+  });
+
+  it('ignores a byte order mark, and keeps positions exact', () => {
+    expect(validate('\ufeff{"resourceType": "Patient", "xyzzy": 1}')).toEqual([
+      {
+        severity: 'error',
+        message: 'Unknown element "xyzzy".',
+        path: 'Patient.xyzzy',
+        line: 1,
+        column: 30,
       },
     ]);
   });
@@ -34,5 +47,12 @@ describe('JSON syntax', () => {
   it('survives extreme nesting', () => {
     const issues = validate('['.repeat(200000));
     expect(issues[0]?.severity).toBe('error');
+  });
+
+  it('recognises how each browser reports a call stack that ran out', () => {
+    const firefoxError = Object.assign(new Error('too much recursion'), { name: 'InternalError' });
+    expect(isStackOverflow(new RangeError('Maximum call stack size exceeded'))).toBe(true);
+    expect(isStackOverflow(firefoxError)).toBe(true);
+    expect(isStackOverflow(new TypeError('other'))).toBe(false);
   });
 });

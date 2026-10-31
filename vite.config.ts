@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -10,5 +11,11 @@ export default defineConfig({
     modulePreload: { polyfill: false },
     // One bundle on purpose: splitting it would mean network requests after the page has loaded.
     chunkSizeWarningLimit: 1000,
+    rolldownOptions: {
+      input: [
+        resolve(import.meta.dirname, 'index.html'),
+        resolve(import.meta.dirname, 'how-to-use/index.html'),
+      ],
+    },
   },
 });

@@ -45,6 +45,11 @@ describe('unknown elements', () => {
     );
   });
 
+  it('copes with a very long unknown name', () => {
+    const name = 'a'.repeat(1_000_000);
+    expect(validate(`{"resourceType": "Patient", "${name}": 1}`)).toHaveLength(1);
+  });
+
   it('rejects a duplicated element', () => {
     expect(
       validate('{\n  "resourceType": "Patient",\n  "active": true,\n  "active": false\n}'),

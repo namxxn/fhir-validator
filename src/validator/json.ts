@@ -15,7 +15,7 @@ interface SyntaxProblem {
   column: number;
 }
 
-export type ParseResult = { document: DocumentNode } | { problem: SyntaxProblem };
+type ParseResult = { document: DocumentNode } | { problem: SyntaxProblem };
 
 function hasLocation(error: unknown): error is Error & { line: number; column: number } {
   return error instanceof Error && 'line' in error && 'column' in error;
@@ -23,9 +23,11 @@ function hasLocation(error: unknown): error is Error & { line: number; column: n
 
 export function parseJson(text: string): ParseResult {
   try {
-    return { document: parse(text, { mode: 'json' }) };
+    // A byte order mark is legal to ignore. A space takes its place so positions stay exact.
+    return { document: parse(text.replace(/^\uFEFF/, ' '), { mode: 'json' }) };
   } catch (error) {
-    if (!hasLocation(error)) {
+    // Safari puts a line and column on its stack overflow error too.
+    if (!hasLocation(error) || isStackOverflow(error)) {
       throw error;
     }
     return {
@@ -36,6 +38,11 @@ export function parseJson(text: string): ParseResult {
       },
     };
   }
+}
+
+/** Browsers disagree on what they throw when the call stack runs out: Firefox has its own error. */
+export function isStackOverflow(error: unknown): boolean {
+  return error instanceof RangeError || (error instanceof Error && error.name === 'InternalError');
 }
 
 export function memberName(member: MemberNode): string {

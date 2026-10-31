@@ -1,12 +1,17 @@
+import { abbreviate } from './text';
 import type { PrimitiveDefinition } from './types';
 
-const MAX_VALUE_SHOWN = 80;
 const INT32_MIN = -2147483648;
 const INT32_MAX = 2147483647;
 const INTEGER_TYPES = new Set(['integer', 'positiveInt', 'unsignedInt']);
 const CALENDAR_TYPES = new Set(['date', 'dateTime', 'instant']);
 const ASCII_WHITESPACE = /[ \t\n\v\f\r]+/g;
-const BASE64_CHARACTERS = /^[0-9a-zA-Z+/=]+$/;
+const BASE64 = /^[0-9a-zA-Z+/]+={0,2}$/;
+const URN_FORMATS: [string, string][] = [
+  ['urn:oid:', 'oid'],
+  ['urn:uuid:', 'uuid'],
+];
+const URI_TYPES = new Set(['uri', 'url', 'canonical']);
 
 const FORMAT_HINTS: Record<string, string> = {
   base64Binary: 'Expected base64-encoded data.',
@@ -47,22 +52,33 @@ function isRealCalendarDate(value: string): boolean {
 }
 
 /**
- * Means the same as the spec's base64Binary regex. That regex repeats a group per four characters,
- * which overflows the regex engine on a large attachment and would fail a perfectly valid file.
+ * Replaces the spec's base64Binary regex, which repeats a group per four characters and so overflows
+ * the regex engine on a large attachment, failing a perfectly valid file. It also accepts "=" in the
+ * middle of the data, which cannot be decoded and which the official validator rejects.
  */
 function isBase64(value: string): boolean {
   const compact = value.replace(ASCII_WHITESPACE, '');
-  return compact.length % 4 === 0 && BASE64_CHARACTERS.test(compact);
-}
-
-/** A rejected attachment can be megabytes long, and quoting it whole would bury the message. */
-function abbreviate(value: string): string {
-  return value.length > MAX_VALUE_SHOWN ? `${value.slice(0, MAX_VALUE_SHOWN)}…` : value;
+  return compact.length % 4 === 0 && BASE64.test(compact);
 }
 
 function describeFormatProblem(type: string, value: string): string {
   const hint = FORMAT_HINTS[type];
   return `"${abbreviate(value)}" is not a valid ${type}.${hint ? ` ${hint}` : ''}`;
+}
+
+/** The official validator holds these URIs to the oid and uuid formats, not just to "no spaces". */
+function findUrnProblem(
+  primitives: Record<string, PrimitiveDefinition>,
+  value: string,
+): string | undefined {
+  const urn = value.split(/[|#]/)[0] ?? value;
+  for (const [prefix, type] of URN_FORMATS) {
+    const regex = primitives[type]?.regex;
+    if (urn.startsWith(prefix) && regex && !compile(regex).test(urn)) {
+      return describeFormatProblem(type, value);
+    }
+  }
+  return undefined;
 }
 
 /**
@@ -71,15 +87,24 @@ function describeFormatProblem(type: string, value: string): string {
  */
 export function findFormatProblem(
   type: string,
-  definition: PrimitiveDefinition,
+  primitives: Record<string, PrimitiveDefinition>,
   value: string,
 ): string | undefined {
+  const definition = primitives[type];
   const matches =
     type === 'base64Binary'
       ? isBase64(value)
-      : !definition.regex || compile(definition.regex).test(value);
+      : !definition?.regex || compile(definition.regex).test(value);
   if (!matches) {
     return describeFormatProblem(type, value);
+  }
+  // trim() also covers Unicode spaces, which the code regex lets through but the official validator
+  // rejects at either end of a code.
+  if (type === 'code' && value !== value.trim()) {
+    return describeFormatProblem(type, value);
+  }
+  if (URI_TYPES.has(type)) {
+    return findUrnProblem(primitives, value);
   }
   if (CALENDAR_TYPES.has(type) && !isRealCalendarDate(value)) {
     return `"${value}" is not a real calendar date.`;

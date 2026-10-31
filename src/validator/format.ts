@@ -1,4 +1,4 @@
-import { memberName, parseJson, sourceText } from './json';
+import { isStackOverflow, memberName, parseJson, sourceText } from './json';
 import type { ValueNode } from './json';
 
 const INDENT = '  ';
@@ -22,9 +22,14 @@ function print(node: ValueNode, text: string, indent: string): string {
 /**
  * Reprints from the source text rather than through JSON.parse, which would silently rewrite
  * decimals such as 1.10 (their precision is meaningful in FHIR) and drop duplicate keys.
- * Returns null when the text is not valid JSON.
+ * Returns null when the text is not valid JSON or is nested too deeply to walk.
  */
 export function formatJson(text: string): string | null {
-  const result = parseJson(text);
-  return 'document' in result ? `${print(result.document.body, text, '')}\n` : null;
+  try {
+    const result = parseJson(text);
+    return 'document' in result ? `${print(result.document.body, text, '')}\n` : null;
+  } catch (error) {
+    if (isStackOverflow(error)) return null;
+    throw error;
+  }
 }

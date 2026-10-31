@@ -1,10 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="10" fill="#ffffff"/>
-  <g fill="#2563eb">
-    <rect x="7.07" y="10.78" width="13.59" height="13.59" rx="3" ry="3"/>
-    <path d="M34.11,24.38h-7.58c-1.66,0-3-1.35-3-3v-7.58c0-1.66,1.35-3,3-3h7.58c1.66,0,3,1.35,3,3v7.58c0,1.66-1.35,3-3,3ZM26.52,12.22c-.87,0-1.57.71-1.57,1.57v7.58c0,.87.71,1.57,1.57,1.57h7.58c.87,0,1.57-.71,1.57-1.57v-7.58c0-.87-.71-1.57-1.57-1.57h-7.58Z"/>
-    <rect x="27.33" y="6.97" width="13.59" height="13.59" rx="3" ry="3"/>
-    <rect x="7.07" y="27.24" width="13.59" height="13.59" rx="3" ry="3"/>
-    <rect x="23.52" y="27.24" width="13.59" height="13.59" rx="3" ry="3"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2563eb;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="7.07" y="10.78" width="13.59" height="13.59" rx="3" ry="3"/>
+  <path class="cls-1" d="M34.11,24.38h-7.58c-1.66,0-3-1.35-3-3v-7.58c0-1.66,1.35-3,3-3h7.58c1.66,0,3,1.35,3,3v7.58c0,1.66-1.35,3-3,3ZM26.52,12.22c-.87,0-1.57.71-1.57,1.57v7.58c0,.87.71,1.57,1.57,1.57h7.58c.87,0,1.57-.71,1.57-1.57v-7.58c0-.87-.71-1.57-1.57-1.57h-7.58Z"/>
+  <rect class="cls-1" x="27.33" y="6.97" width="13.59" height="13.59" rx="3" ry="3"/>
+  <rect class="cls-1" x="7.07" y="27.24" width="13.59" height="13.59" rx="3" ry="3"/>
+  <rect class="cls-1" x="23.52" y="27.24" width="13.59" height="13.59" rx="3" ry="3"/>
 </svg>

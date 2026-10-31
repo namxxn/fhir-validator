@@ -6,7 +6,7 @@ import knownFaults from './fixtures/known-hl7-faults.json';
 
 interface KnownFault {
   errors: number;
-  message: string;
+  messages: string[];
 }
 
 const NOT_A_RESOURCE = 'package-min-ver.json';
@@ -42,6 +42,6 @@ describe('official R4 examples that break the R4 definitions', () => {
     const fault = faults[name] as KnownFault;
     const errors = errorsFor(name);
     expect(errors).toHaveLength(fault.errors);
-    expect(new Set(errors.map((issue) => issue.message))).toEqual(new Set([fault.message]));
+    expect(new Set(errors.map((issue) => issue.message))).toEqual(new Set(fault.messages));
   });
 });

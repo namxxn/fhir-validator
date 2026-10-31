@@ -1,7 +1,10 @@
+import { createHash } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import { unzipSync, strFromU8 } from 'fflate';
 
 const SOURCE_URL = 'https://hl7.org/fhir/R4/definitions.json.zip';
+// R4 is frozen, so a change here means the download is not the file these definitions came from.
+const SOURCE_SHA256 = 'ecd74b1d57d86869992b4171e490d1a3fcebb8877110756b73f7be0f7159f534';
 const OUTPUT_URL = new URL('../src/definitions/r4.json', import.meta.url);
 const FHIR_TYPE_EXTENSION = 'http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type';
 const REGEX_EXTENSION = 'http://hl7.org/fhir/StructureDefinition/regex';
@@ -84,7 +87,12 @@ async function downloadSources(): Promise<Record<string, Uint8Array>> {
   if (!response.ok) {
     throw new Error(`Could not download ${SOURCE_URL}: ${response.status}`);
   }
-  return unzipSync(new Uint8Array(await response.arrayBuffer()));
+  const archive = new Uint8Array(await response.arrayBuffer());
+  const digest = createHash('sha256').update(archive).digest('hex');
+  if (digest !== SOURCE_SHA256) {
+    throw new Error(`${SOURCE_URL} has checksum ${digest}, expected ${SOURCE_SHA256}`);
+  }
+  return unzipSync(archive);
 }
 
 function readBundle<T>(files: Record<string, Uint8Array>, name: string): T[] {

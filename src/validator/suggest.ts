@@ -18,6 +18,8 @@ export function closestName(name: string, candidates: string[]): string | undefi
   let best: string | undefined;
   let bestDistance = allowedDistance + 1;
   for (const candidate of candidates) {
+    // Lengths alone can rule a candidate out, which keeps a megabyte-long name from freezing the page.
+    if (Math.abs(candidate.length - name.length) > allowedDistance) continue;
     const distance = editDistance(lowered, candidate.toLowerCase());
     if (distance < bestDistance) {
       best = candidate;
